@@ -1,3 +1,13 @@
+
+category = ['Jedzenie', 'Chemia', 'Auto', 'Mieszkanie', 'Sparkonto']
+
+def add_expense(month):
+    print()
+    expense_value = print(int(input('Podaj kwote wydatku [euro]: ')))
+    expense_cat = print(input('Podaj kategorie: ', category))
+    
+
+
 # Main while
 while True:
     print()
@@ -5,6 +15,7 @@ while True:
 
     if month == 0:
         break
+
 
 # Secondary while
     while True:
@@ -25,6 +36,7 @@ while True:
             print("Przegląd aktualnych kosztów")
             print("------------------------------")
         if user_choice == 2:
+            add_expense(month)
             print("Dodaj nowy wydatek")
             print("------------------------------")
         if user_choice == 3:
