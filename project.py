@@ -7,7 +7,8 @@ expenses = []
 def add_expense(month):
     print()
     expense_value = print(int(input('Podaj kwote wydatku [euro]: ')))
-    expense_cat = print(input('Podaj kategorie: ', category))
+    print(category)
+    expense_cat = print(input('Podaj kategorie: '))
     
     expense = (expense_value, expense_cat, month)
     expenses.append(expense)
