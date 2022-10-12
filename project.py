@@ -51,7 +51,7 @@ while True:
         if user_choice == 1:
             print("Przegląd aktualnych kosztów")
             print("------------------------------")
-            print_expenses
+            print_expenses(month)
         if user_choice == 2:
             add_expense(month)
             print("Dodaj nowy wydatek")
