@@ -7,17 +7,20 @@ expenses = []
 def add_expense(month):
     print()
     expense_value = print(int(input('Podaj kwote wydatku [euro]: ')))
+    print()
     print(category)
+    print()
     expense_cat = print(input('Podaj kategorie: '))
     
     expense = (expense_value, expense_cat, month)
     expenses.append(expense)
-
+    print()
+    print('Poprawnie dodano!')
+    print()
 
 # Printing all expenses
 def print_expenses():
-    print()
-    if expenses in month == month:
+    if month in expenses:
         print(expenses)
     else:
         print('Sprobuj ponownie.')
@@ -52,7 +55,7 @@ while True:
         if user_choice == 1:
             print("Przegląd aktualnych kosztów")
             print("------------------------------")
-            print_expenses(month)
+            print_expenses()
         if user_choice == 2:
             add_expense(month)
             print("Dodaj nowy wydatek")
