@@ -19,12 +19,8 @@ def add_expense(month):
     print()
 
 # Printing all expenses
-def print_expenses():
-    if month in expenses:
-        print(expenses)
-    else:
-        print('Sprobuj ponownie.')
-    return
+def get_expenses(month):
+    print(expenses)
 
 
 
@@ -55,7 +51,7 @@ while True:
         if user_choice == 1:
             print("Przegląd aktualnych kosztów")
             print("------------------------------")
-            print_expenses()
+            get_expenses(month)
         if user_choice == 2:
             add_expense(month)
             print("Dodaj nowy wydatek")
