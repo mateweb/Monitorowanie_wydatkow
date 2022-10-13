@@ -2,6 +2,7 @@
 expenses = []
 
 
+
 # Adding a new expense
 def add_expense(month):
     print()
@@ -15,9 +16,19 @@ def add_expense(month):
     print('Poprawnie dodano!')
     print()
 
+
 # Printing all expenses
 def get_expenses(month):
+    for expense_value, expense_cat, expense_month in expenses:
+        if expense_month == month:
+            print(f'{expense_value} - {expense_cat}')
+
+
+# Delete expenses
+def delete_expenses(month):
     print(expenses)
+# How print a index?
+    user_delete = int(input('Wybierz pozycje do usuniecia i nacisnij Enter: '))
 
 
 
