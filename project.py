@@ -1,16 +1,13 @@
 # Variables
-category = ['Jedzenie', 'Chemia', 'Auto', 'Mieszkanie', 'Sparkonto']
 expenses = []
 
 
 # Adding a new expense
 def add_expense(month):
     print()
-    expense_value = print(int(input('Podaj kwote wydatku [euro]: ')))
+    expense_value = int(input('Podaj kwote wydatku [euro]: '))
     print()
-    print(category)
-    print()
-    expense_cat = print(input('Podaj kategorie: '))
+    expense_cat = input('Podaj kategorie: [Jedzenie, Chemia, Auto, Mieszkanie, Sparkonto] ')
     
     expense = (expense_value, expense_cat, month)
     expenses.append(expense)
