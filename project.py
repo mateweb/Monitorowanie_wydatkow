@@ -27,8 +27,14 @@ def get_expenses(month):
 # Delete expenses
 def delete_expenses(month):
     print(expenses)
-# How print a index?
-    user_delete = int(input('Wybierz pozycje do usuniecia i nacisnij Enter: '))
+    print()
+    user_delete = int(input('Wybierz pozycje do usuniecia [0,1,2,3 itd.] i nacisnij Enter: '))
+    del expenses[user_delete]
+    element = expenses[user_delete]
+    message = print('Pomyslnie usunieto pozycje nr: ', element)
+    print()
+    print(message % element)
+    print(expenses)
 
 
 
@@ -39,6 +45,7 @@ while True:
 
     if month == 0:
         break
+    
 
 
 # Secondary while
@@ -59,14 +66,18 @@ while True:
         if user_choice == 1:
             print("Przegląd aktualnych kosztów")
             print("------------------------------")
+            print()
             get_expenses(month)
         if user_choice == 2:
-            add_expense(month)
             print("Dodaj nowy wydatek")
             print("------------------------------")
+            print()
+            add_expense(month)
         if user_choice == 3:
             print("Usuń istniejący wydatek")
             print("------------------------------")
+            print()
+            delete_expenses(month)
         if user_choice == 4:
             print("Statystyki")
             print("------------------------------")
