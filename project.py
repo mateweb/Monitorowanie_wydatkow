@@ -1,3 +1,6 @@
+
+import sys
+
 # Variables
 expenses = []
 
@@ -30,7 +33,9 @@ def delete_expenses(month):
     print()
     user_delete = int(input('Wybierz pozycje do usuniecia [0,1,2,3 itd.] i nacisnij Enter: '))
     del expenses[user_delete]
+    print()
     message = print('Pomyslnie usunieto ')
+    print(message)
     print()
     print(expenses)
 
@@ -79,4 +84,6 @@ while True:
         if user_choice == 4:
             print("Statystyki")
             print("------------------------------")
+        if user_choice == 5:
+            sys.exit(0)
        
