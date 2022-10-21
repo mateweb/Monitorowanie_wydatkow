@@ -30,10 +30,8 @@ def delete_expenses(month):
     print()
     user_delete = int(input('Wybierz pozycje do usuniecia [0,1,2,3 itd.] i nacisnij Enter: '))
     del expenses[user_delete]
-    element = expenses[user_delete]
-    message = print('Pomyslnie usunieto pozycje nr: ', element)
+    message = print('Pomyslnie usunieto ')
     print()
-    print(message % element)
     print(expenses)
 
 
