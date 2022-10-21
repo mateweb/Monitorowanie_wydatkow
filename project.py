@@ -42,11 +42,18 @@ def delete_expenses(month):
 # Statistics
 def show_statistics(month):
     summ_value_month = sum(expense_value for expense_value, _, expense_month in expenses if expense_month == month)
-    # avg_value_in_month = sum()
+    summ_all_value = sum(expense_value for expense_value, _, _, in expenses)
 
 
     print('Laczna suma wydatkow w tym miesiacu wynosi [€]: ', summ_value_month)
-    # print('Srednia ilosc wydatkow w tym miesiacu: ', avg_value_in_month)
+    print('Laczna ilosc wydatkow w tym roku [€]: ', summ_all_value)
+
+
+# New definition: add_income
+
+# New definition: show_income
+
+# New definition: show difference (incomes - expenses)
 
 
 
