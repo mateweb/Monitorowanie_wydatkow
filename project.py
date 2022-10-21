@@ -5,6 +5,12 @@ import sys
 expenses = []
 
 
+# Printing all expenses
+def get_expenses(month):
+    for expense_value, expense_cat, expense_month in expenses:
+        if expense_month == month:
+            print(f'{expense_value} - {expense_cat}')
+
 
 # Adding a new expense
 def add_expense(month):
@@ -20,13 +26,6 @@ def add_expense(month):
     print()
 
 
-# Printing all expenses
-def get_expenses(month):
-    for expense_value, expense_cat, expense_month in expenses:
-        if expense_month == month:
-            print(f'{expense_value} - {expense_cat}')
-
-
 # Delete expenses
 def delete_expenses(month):
     print(expenses)
@@ -38,6 +37,16 @@ def delete_expenses(month):
     print(message)
     print()
     print(expenses)
+
+
+# Statistics
+def show_statistics(month):
+    summ_value_month = sum(expense_value for expense_value, _, expense_month in expenses if expense_month == month)
+
+
+
+    print('Laczna suma wydatkow w tym miesiacu wynosi: ', summ_value_month)
+
 
 
 
@@ -84,6 +93,8 @@ while True:
         if user_choice == 4:
             print("Statystyki")
             print("------------------------------")
+            print()
+            show_statistics(month)
         if user_choice == 5:
             sys.exit(0)
        
