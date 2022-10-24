@@ -34,11 +34,16 @@ def add_expense(month):
 def delete_expenses(month):
     print(expenses)
     print()
-    user_delete = int(input('Wybierz pozycje do usuniecia [0,1,2,3 itd.] i nacisnij Enter: '))
-    del expenses[user_delete]
-    print()
-    message = print('Pomyslnie usunieto ')
-    print(message)
+    try:
+        user_delete = int(input('Wybierz pozycje do usuniecia [0,1,2,3 itd.] i nacisnij Enter: '))
+        del expenses[user_delete]
+        print()
+        message = print('Pomyslnie usunieto ')
+    except ValueError:
+        print()
+        print('Wybierz poprawnie numer indeksu [Cyfra 0 oznacza pierwsza pozycje, cyfra 1 druga itd.]')
+    else:
+        print(message)
     print()
     print(expenses)
 
