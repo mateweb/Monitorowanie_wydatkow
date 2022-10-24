@@ -8,6 +8,7 @@ from datetime import date
 # Variables
 expenses = []
 today = date.today()
+file = open('expense_base.txt', 'w+')
 
 
 # Printing all expenses
@@ -35,6 +36,7 @@ def add_expense(month):
         print()
         print('Poprawnie dodano!')
     print()
+
 
 # Delete expenses
 def delete_expenses(month):
@@ -68,10 +70,21 @@ def show_statistics(month):
  # New option: show difference (incomes - expenses)   
 
 
+ # Save / Open a File
+def save_open_file():
+    for expense_value, expense_cat, today in expenses:
+        file.write(expense_value + '-' + expense_cat)
+        print('Zapisano w pliku tekstowym [expense_base.txt]')
+
+        file.close()
+
+    
+
+
+
 # New definition: add_income
 
 # New definition: show_income
-
 
 
 
@@ -85,7 +98,6 @@ while True:
         break
     
 
-
 # Secondary while
     while True:
         print()
@@ -94,7 +106,8 @@ while True:
         print("2. Dodaj wydatek")
         print("3. Usuń wydatek")
         print("4. Statystyki")
-        print("5. Zamknij program")
+        print('5. Zapisz do pliku')
+        print("6. Zamknij program")
         print()
         user_choice = int(input("Wybierz pozycję z menu [0-5] i naciśnij Enter: "))
         print()
@@ -122,5 +135,10 @@ while True:
             print()
             show_statistics(month)
         if user_choice == 5:
+            print("Zapisz do pliku")
+            print("------------------------------")
+            print()
+            save_open_file
+        if user_choice == 6:
             sys.exit(0)
        
