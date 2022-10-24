@@ -16,14 +16,18 @@ def get_expenses(month):
 # Adding a new expense
 def add_expense(month):
     print()
-    expense_value = int(input('Podaj kwote wydatku [euro]: '))
-    print()
-    expense_cat = input('Podaj kategorie: [Jedzenie, Chemia, Auto, Mieszkanie, Sparkonto, etc.] ')
+    try:
+        expense_value = int(input('Podaj kwote wydatku [euro]: '))
+        print()
+        expense_cat = input('Podaj kategorie: [Jedzenie, Chemia, Auto, Mieszkanie, Sparkonto, etc.] ')
     
-    expense = (expense_value, expense_cat, month)
-    expenses.append(expense)
-    print()
-    print('Poprawnie dodano!')
+        expense = (expense_value, expense_cat, month)
+        expenses.append(expense)
+    except ValueError:
+        print()
+        print('Wpisz poprawna kwote! ')
+    else:
+        print('Poprawnie dodano!')
     print()
 
 # Delete expenses
