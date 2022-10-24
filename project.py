@@ -1,6 +1,7 @@
 
 import sys
 
+
 # Variables
 expenses = []
 
@@ -17,14 +18,13 @@ def add_expense(month):
     print()
     expense_value = int(input('Podaj kwote wydatku [euro]: '))
     print()
-    expense_cat = input('Podaj kategorie: [Jedzenie, Chemia, Auto, Mieszkanie, Sparkonto] ')
+    expense_cat = input('Podaj kategorie: [Jedzenie, Chemia, Auto, Mieszkanie, Sparkonto, etc.] ')
     
     expense = (expense_value, expense_cat, month)
     expenses.append(expense)
     print()
     print('Poprawnie dodano!')
     print()
-
 
 # Delete expenses
 def delete_expenses(month):
@@ -47,6 +47,7 @@ def show_statistics(month):
 
     print('Laczna suma wydatkow w tym miesiacu wynosi [€]: ', summ_value_month)
     print('Laczna ilosc wydatkow w tym roku [€]: ', summ_all_value)
+    
 
 
 # New definition: add_income
