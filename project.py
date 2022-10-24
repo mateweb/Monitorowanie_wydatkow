@@ -1,16 +1,20 @@
 
 import sys
+import datetime
+
+from datetime import date
 
 
 # Variables
 expenses = []
+today = date.today()
 
 
 # Printing all expenses
 def get_expenses(month):
     for expense_value, expense_cat, expense_month in expenses:
         if expense_month == month:
-            print(f'{expense_value} - {expense_cat}')
+            print(f'{expense_value} - {expense_cat} - {today} ')
 
 
 # Adding a new expense
@@ -20,6 +24,7 @@ def add_expense(month):
         expense_value = int(input('Podaj kwote wydatku [euro]: '))
         print()
         expense_cat = input('Podaj kategorie: [Jedzenie, Chemia, Auto, Mieszkanie, Sparkonto, etc.] ')
+        
     
         expense = (expense_value, expense_cat, month)
         expenses.append(expense)
@@ -27,6 +32,7 @@ def add_expense(month):
         print()
         print('Wpisz poprawna kwote! ')
     else:
+        print()
         print('Poprawnie dodano!')
     print()
 
@@ -41,7 +47,10 @@ def delete_expenses(month):
         message = print('Pomyslnie usunieto ')
     except ValueError:
         print()
-        print('Wybierz poprawnie numer indeksu [Cyfra 0 oznacza pierwsza pozycje, cyfra 1 druga itd.]')
+        print('Wybierz poprawnie numer indeksu [Cyfra 0 oznacza pierwsza pozycje, cyfra 1 druga pozycje itd.]')
+    except IndexError:
+        print()
+        print('Wybierz poprawnie numer indeksu [Cyfra 0 oznacza pierwsza pozycje, cyfra 1 druga pozycje itd.]')
     else:
         print(message)
     print()
@@ -56,14 +65,13 @@ def show_statistics(month):
 
     print('Laczna suma wydatkow w tym miesiacu wynosi [€]: ', summ_value_month)
     print('Laczna ilosc wydatkow w tym roku [€]: ', summ_all_value)
-    
+ # New option: show difference (incomes - expenses)   
 
 
 # New definition: add_income
 
 # New definition: show_income
 
-# New definition: show difference (incomes - expenses)
 
 
 
