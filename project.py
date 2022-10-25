@@ -29,6 +29,7 @@ def add_expense(month):
     
         expense = (expense_value, expense_cat, month)
         expenses.append(expense)
+    
     except ValueError:
         print()
         print('Wpisz poprawna kwote! ')
@@ -72,11 +73,8 @@ def show_statistics(month):
 
  # Save / Open a File
 def save_open_file():
-    for expense_value, expense_cat, today in expenses:
-        file.write(expense_value + '-' + expense_cat)
-        print('Zapisano w pliku tekstowym [expense_base.txt]')
-
-        file.close()
+    with open('expense_base.txt', 'w') as file:
+        file.write(expenses)
 
     
 
@@ -92,7 +90,7 @@ def save_open_file():
 # Main while
 while True:
     print()
-    month = int(input("Wybierz miesiąc [1-12]: "))
+    month = int(input("Wybierz miesiac [1-12]: "))
 
     if month == 0:
         break
