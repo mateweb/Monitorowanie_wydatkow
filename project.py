@@ -9,6 +9,7 @@ from datetime import date
 expenses = []
 today = date.today()
 file = open('expense_base.txt', 'w+')
+month = int(input("Wybierz miesiac [1-12]: "))
 
 
 # Printing all expenses
@@ -89,11 +90,15 @@ def save_open_file():
 
 # Main while
 while True:
-    print()
-    month = int(input("Wybierz miesiac [1-12]: "))
+    try:
+       
+        month = int(input("Wybierz miesiac [1-12]: "))
 
-    if month == 0:
-        break
+        if month == 0 and month == str:
+            break
+    
+    except ValueError:
+        print('Wybierz poprawny miesiac!')
     
 
 # Secondary while
