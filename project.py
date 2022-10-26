@@ -9,7 +9,6 @@ from datetime import date
 expenses = []
 today = date.today()
 file = open('expense_base.txt', 'w+')
-month = int(input("Wybierz miesiac [1-12]: "))
 
 
 # Printing all expenses
@@ -37,7 +36,7 @@ def add_expense(month):
     else:
         print()
         print('Poprawnie dodano!')
-    print()
+        print()
 
 
 # Delete expenses
@@ -57,18 +56,20 @@ def delete_expenses(month):
         print('Wybierz poprawnie numer indeksu [Cyfra 0 oznacza pierwsza pozycje, cyfra 1 druga pozycje itd.]')
     else:
         print(message)
-    print()
-    print(expenses)
+        print()
+        print(expenses)
 
 
 # Statistics
 def show_statistics(month):
+   
     summ_value_month = sum(expense_value for expense_value, _, expense_month in expenses if expense_month == month)
     summ_all_value = sum(expense_value for expense_value, _, _, in expenses)
 
 
     print('Laczna suma wydatkow w tym miesiacu wynosi [€]: ', summ_value_month)
     print('Laczna ilosc wydatkow w tym roku [€]: ', summ_all_value)
+ 
  # New option: show difference (incomes - expenses)   
 
 
@@ -79,27 +80,20 @@ def save_open_file():
 
     
 
-
-
 # New definition: add_income
 
 # New definition: show_income
 
 
 
-
 # Main while
 while True:
     try:
-       
         month = int(input("Wybierz miesiac [1-12]: "))
-
-        if month == 0 and month == str:
-            break
-    
-    except ValueError:
-        print('Wybierz poprawny miesiac!')
-    
+    except ValueError: 
+        print('Wybrano bledny miesiac!')
+        break      
+        
 
 # Secondary while
     while True:
@@ -117,31 +111,37 @@ while True:
 
         if user_choice == 0:
             break
+       
         if user_choice == 1:
             print("Przegląd aktualnych kosztów")
             print("------------------------------")
             print()
             get_expenses(month)
+        
         if user_choice == 2:
             print("Dodaj nowy wydatek")
             print("------------------------------")
             print()
             add_expense(month)
+        
         if user_choice == 3:
             print("Usuń istniejący wydatek")
             print("------------------------------")
             print()
             delete_expenses(month)
+        
         if user_choice == 4:
             print("Statystyki")
             print("------------------------------")
             print()
             show_statistics(month)
+        
         if user_choice == 5:
             print("Zapisz do pliku")
             print("------------------------------")
             print()
             save_open_file
+        
         if user_choice == 6:
             sys.exit(0)
        
