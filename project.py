@@ -75,9 +75,9 @@ def show_statistics(month):
 
 
  # Save / Open a File
-def save_open_file():
-    with open('expense_base.txt', 'w') as file:
-        file.write(expenses)
+# def save_open_file():
+#    with open('expense_base.txt', 'w') as file:
+#        file.write(expenses)
 
     
 
@@ -106,7 +106,7 @@ while True:
         print("2. Dodaj wydatek")
         print("3. Usuń wydatek")
         print("4. Statystyki")
-        print('5. Zapisz do pliku')
+        # print('5. Zapisz do pliku')
         print("6. Zamknij program")
         print()
         user_choice = int(input("Wybierz pozycję z menu [0-5] i naciśnij Enter: "))
@@ -139,11 +139,11 @@ while True:
             print()
             show_statistics(month)
         
-        if user_choice == 5:
-            print("Zapisz do pliku")
-            print("------------------------------")
-            print()
-            save_open_file
+        #if user_choice == 5:
+        #    print("Zapisz do pliku")
+        #    print("------------------------------")
+        #    print()
+        #    save_open_file
         
         if user_choice == 6:
             sys.exit(0)
