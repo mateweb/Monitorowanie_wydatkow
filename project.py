@@ -1,4 +1,5 @@
 
+from asyncore import loop
 import sys
 import datetime
 
@@ -66,7 +67,7 @@ def show_statistics(month):
     summ_value_month = sum(expense_value for expense_value, _, expense_month in expenses if expense_month == month)
     summ_all_value = sum(expense_value for expense_value, _, _, in expenses)
 
-
+    print('Najdrozszy wydatek dotychczas: ', max(expenses))
     print('Laczna suma wydatkow w tym miesiacu wynosi [€]: ', summ_value_month)
     print('Laczna ilosc wydatkow w tym roku [€]: ', summ_all_value)
  
@@ -87,12 +88,14 @@ def save_open_file():
 
 
 # Main while
+#TASK1 - by user_input '123231313' does not returning to beginning
 while True:
     try:
         month = int(input("Wybierz miesiac [1-12]: "))
+        if month == 0:
+            break
     except ValueError: 
-        print('Wybrano bledny miesiac!')
-        break      
+            print('Wybrano bledny miesiac!')
         
 
 # Secondary while
