@@ -67,7 +67,7 @@ def show_statistics(month):
     summ_value_month = sum(expense_value for expense_value, _, expense_month in expenses if expense_month == month)
     summ_all_value = sum(expense_value for expense_value, _, _, in expenses)
 
-    print('Najdrozszy wydatek dotychczas: ', max(expenses))
+    print('Najdrozszy wydatek dotychczas [€]: ', max(expenses))
     print('Laczna suma wydatkow w tym miesiacu wynosi [€]: ', summ_value_month)
     print('Laczna ilosc wydatkow w tym roku [€]: ', summ_all_value)
  
