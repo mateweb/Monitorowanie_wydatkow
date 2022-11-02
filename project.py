@@ -1,5 +1,4 @@
 
-from asyncore import loop
 import sys
 import datetime
 
