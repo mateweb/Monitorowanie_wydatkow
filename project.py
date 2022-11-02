@@ -19,7 +19,7 @@ file = open('expense_base.txt', 'w+')
 def get_expenses(month):
     for expense_value, expense_cat, expense_month in expenses:
         if expense_month == month:
-            print(f'{expense_value} - {expense_cat} - {today} ')
+            print(f'{expense_value}€ - {expense_cat} - {today} ')
 
 
 # Adding a new expense
@@ -102,7 +102,7 @@ def add_income(month):
         print()
 
 
-# Show Income
+# Show Incomes
 def get_incomes(month):
     for income_value, income_cat, income_month in incomes:
         if income_month == month:
