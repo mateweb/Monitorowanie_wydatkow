@@ -15,6 +15,7 @@ today = date.today()
 file = open('expense_base.txt', 'w+')
 
 
+
 # Printing all expenses
 def get_expenses(month):
     for expense_value, expense_cat, expense_month in expenses:
@@ -134,47 +135,50 @@ while True:
         # print('?. Zapisz do pliku')
         print("7. Zamknij program")
         print()
-        user_choice = int(input("Wybierz pozycję z menu [0-5] i naciśnij Enter: "))
-        print()
+        
+        try:
+            user_choice = int(input("Wybierz pozycję z menu [0-5] i naciśnij Enter: "))
+            print()
 
-        if user_choice == 0:
-            break
+            if user_choice == 0:
+                break
+        
        
-        if user_choice == 1:
-            print("Przegląd aktualnych kosztów")
-            print("------------------------------")
-            print()
-            get_expenses(month)
+            if user_choice == 1:
+                print("Przegląd aktualnych kosztów")
+                print("------------------------------")
+                print()
+                get_expenses(month)
         
-        if user_choice == 2:
-            print("Dodaj nowy wydatek")
-            print("------------------------------")
-            print()
-            add_expense(month)
+            if user_choice == 2:
+                print("Dodaj nowy wydatek")
+                print("------------------------------")
+                print()
+                add_expense(month)
         
-        if user_choice == 3:
-            print("Usuń istniejący wydatek")
-            print("------------------------------")
-            print()
-            delete_expenses(month)
+            if user_choice == 3:
+                print("Usuń istniejący wydatek")
+                print("------------------------------")
+                print()
+                delete_expenses(month)
 
-        if user_choice == 4:
-            print('Dodaj nowy przychod')
-            print('------------------------------')
-            print()
-            add_income(month)
+            if user_choice == 4:
+                print('Dodaj nowy przychod')
+                print('------------------------------')
+                print()
+                add_income(month)
 
-        if user_choice == 5:
-            print('Przeglad aktualnych przychodow')
-            print('------------------------------')
-            print()
-            get_incomes(month)
+            if user_choice == 5:
+                print('Przeglad aktualnych przychodow')
+                print('------------------------------')
+                print()
+                get_incomes(month)
         
-        if user_choice == 6:
-            print("Statystyki")
-            print("------------------------------")
-            print()
-            show_statistics(month)
+            if user_choice == 6:
+                print("Statystyki")
+                print("------------------------------")
+                print()
+                show_statistics(month)
         
         #if user_choice == 5:
         #    print("Zapisz do pliku")
@@ -182,6 +186,8 @@ while True:
         #    print()
         #    save_open_file
         
-        if user_choice == 7:
-            sys.exit(0)
+            if user_choice == 7:
+                sys.exit(0)
        
+        except ValueError:
+            print('Wybierz poprawnie pozycje!')
