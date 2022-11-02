@@ -7,7 +7,11 @@ from datetime import date
 
 # Variables
 expenses = []
+incomes = []
+
 today = date.today()
+# 'Today' show only actually day/date; not date when added
+
 file = open('expense_base.txt', 'w+')
 
 
@@ -26,7 +30,6 @@ def add_expense(month):
         print()
         expense_cat = input('Podaj kategorie: [Jedzenie, Chemia, Auto, Mieszkanie, Sparkonto, etc.] ')
         
-    
         expense = (expense_value, expense_cat, month)
         expenses.append(expense)
     
@@ -80,9 +83,30 @@ def show_statistics(month):
 
     
 
-# New definition: add_income
+# Add Income
+def add_income(month):
+    try:
+        income_value = int(input('Wpisz wartosc przychodu [€]: '))
+        print()
+        income_cat = input('Wpisz zrodlo przychodu: ')
 
-# New definition: show_income
+        income = (income_value, income_cat, month)
+        incomes.append(income)
+    
+    except ValueError:
+        print()
+        print('Wpisz poprawna kwote! ')
+    else:
+        print()
+        print('Poprawnie dodano!')
+        print()
+
+
+# Show Income
+def get_incomes(month):
+    for income_value, income_cat, income_month in incomes:
+        if income_month == month:
+            print(f'{income_value }€ - {income_cat} - {today}')
 
 
 
@@ -104,9 +128,11 @@ while True:
         print("1. Przeglądaj bieżące wydatki")
         print("2. Dodaj wydatek")
         print("3. Usuń wydatek")
-        print("4. Statystyki")
-        # print('5. Zapisz do pliku')
-        print("6. Zamknij program")
+        print("4. Dodaj przychod")
+        print("5. Przegladaj przychody")
+        print("6. Statystyki")
+        # print('?. Zapisz do pliku')
+        print("7. Zamknij program")
         print()
         user_choice = int(input("Wybierz pozycję z menu [0-5] i naciśnij Enter: "))
         print()
@@ -131,8 +157,20 @@ while True:
             print("------------------------------")
             print()
             delete_expenses(month)
-        
+
         if user_choice == 4:
+            print('Dodaj nowy przychod')
+            print('------------------------------')
+            print()
+            add_income(month)
+
+        if user_choice == 5:
+            print('Przeglad aktualnych przychodow')
+            print('------------------------------')
+            print()
+            get_incomes(month)
+        
+        if user_choice == 6:
             print("Statystyki")
             print("------------------------------")
             print()
@@ -144,6 +182,6 @@ while True:
         #    print()
         #    save_open_file
         
-        if user_choice == 6:
+        if user_choice == 7:
             sys.exit(0)
        
