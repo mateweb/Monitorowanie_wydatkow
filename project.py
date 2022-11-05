@@ -1,11 +1,17 @@
 
 import sys
+import sqlite3
 import datetime
 
-from datetime import date
+from datetime import date, datetime
 
 
 # Variables
+#conn = sqlite3.connect('expenses.db')
+#cursor = conn.cursor()
+#cursor.execute("CREATE TABLE expenses(expense_value n(500), expense_cat(30), city char(35), commission decimal(7,2));")
+
+
 expenses = []
 incomes = []
 
@@ -117,13 +123,19 @@ def get_incomes(month):
 #TASK1 - by user_input '123231313' does not returning to beginning
 while True:
     try:
-        month = int(input("Wybierz miesiac [1-12]: "))
+        year = int(input('Podaj rok: '))
+        month = int(input("Podaj miesiac [1-12]: "))
+        day = int(input('Podaj dzien: '))
+
+        d = date(year, month, day)
+        print(d)
+
         if month == 0:
             break
     except ValueError: 
             print('Wybrano bledny miesiac!')
         
-
+        
 # Secondary while
     while True:
         print()
