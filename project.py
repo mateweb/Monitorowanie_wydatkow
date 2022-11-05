@@ -8,8 +8,12 @@ from datetime import date, datetime
 
 # Variables
 
+db = sqlite3.connect('expenses.db')
+cursor = db.cursor()
+
 expenses = []
 incomes = []
+id = 0
 
 
 # Printing all expenses
@@ -29,6 +33,19 @@ def add_expense(month):
         
         expense = (expense_value, expense_cat, month)
         expenses.append(expense)
+
+        id = 0
+
+        cursor.execute(f'''
+
+            insert into expenses (id, value, category) values (
+                {id}, {expense_value}, '{expense_cat}')
+            ''')
+        id+= 1
+
+        db.commit()
+        db.close()
+
     
     except ValueError:
         print()
@@ -38,6 +55,7 @@ def add_expense(month):
         print('Poprawnie dodano!')
         print()
 
+       
 
 # Delete expenses
 def delete_expenses(month):
