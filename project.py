@@ -125,8 +125,11 @@ def get_incomes(month):
 while True:
     try:
         year = int(input('Podaj rok: '))
+        print()
         month = int(input("Podaj miesiac [1-12]: "))
+        print()
         day = int(input('Podaj dzien: '))
+        print()
 
         d = date(year, month, day)
         print(d)
@@ -147,7 +150,6 @@ while True:
         print("4. Dodaj przychod")
         print("5. Przegladaj przychody")
         print("6. Statystyki")
-        # print('?. Zapisz do pliku')
         print("7. Zamknij program")
         print()
         
@@ -194,12 +196,6 @@ while True:
                 print("------------------------------")
                 print()
                 show_statistics(month)
-        
-        #if user_choice == 5:
-        #    print("Zapisz do pliku")
-        #    print("------------------------------")
-        #    print()
-        #    save_open_file
         
             if user_choice == 7:
                 sys.exit(0)
