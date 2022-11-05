@@ -7,26 +7,16 @@ from datetime import date, datetime
 
 
 # Variables
-#conn = sqlite3.connect('expenses.db')
-#cursor = conn.cursor()
-#cursor.execute("CREATE TABLE expenses(expense_value n(500), expense_cat(30), city char(35), commission decimal(7,2));")
-
 
 expenses = []
 incomes = []
-
-today = date.today()
-# 'Today' show only actually day/date; not date when added
-
-file = open('expense_base.txt', 'w+')
-
 
 
 # Printing all expenses
 def get_expenses(month):
     for expense_value, expense_cat, expense_month in expenses:
         if expense_month == month:
-            print(f'{expense_value}€ - {expense_cat} - {today} ')
+            print(f'{expense_value}€ - {expense_cat} - {d} ')
 
 
 # Adding a new expense
@@ -82,15 +72,8 @@ def show_statistics(month):
     print('Najdrozszy wydatek dotychczas [€]: ', max(expenses))
     print('Najwyzszy przychod dotychczas [€]: ', max(incomes))
     print('Laczna suma wydatkow w tym miesiacu wynosi [€]: ', summ_value_month)
-    print('Laczna ilosc wydatkow w tym roku [€]: ', summ_all_expense) 
+    print('Laczna ilosc wydatkow w tym roku [€]: ', summ_all_expense)
 
-
- # Save / Open a File
-# def save_open_file():
-#    with open('expense_base.txt', 'w') as file:
-#        file.write(expenses)
-
-    
 
 # Add Income
 def add_income(month):
@@ -115,12 +98,12 @@ def add_income(month):
 def get_incomes(month):
     for income_value, income_cat, income_month in incomes:
         if income_month == month:
-            print(f'{income_value }€ - {income_cat} - {today}')
+            print(f'{income_value }€ - {income_cat} - {d}')
 
 
 
 # Main while
-#TASK1 - by user_input '123231313' does not returning to beginning
+#TASK - by user_input '123231313' does not returning to beginning
 while True:
     try:
         year = int(input('Podaj rok: '))
@@ -139,7 +122,7 @@ while True:
 # Secondary while
     while True:
         print()
-        print("0. Powrót do wyboru miesiąca")
+        print("0. Powrót do wyboru daty")
         print("1. Przeglądaj bieżące wydatki")
         print("2. Dodaj wydatek")
         print("3. Usuń wydatek")
