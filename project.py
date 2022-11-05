@@ -43,9 +43,6 @@ def add_expense(month):
             ''')
         id+= 1
 
-        db.commit()
-        db.close()
-
     
     except ValueError:
         print()
@@ -54,6 +51,9 @@ def add_expense(month):
         print()
         print('Poprawnie dodano!')
         print()
+
+        db.commit()
+        db.close()
 
        
 
