@@ -5,10 +5,7 @@ cursor = db.cursor()
 
 cursor.execute('''
 
-    CREATE TABLE expenses (
-        id integer,
-        value integer,
-        category string)
+    insert into expenses (id, value, category) values (1, 500, 'Sparkonto')
 
 ''')
 
