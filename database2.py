@@ -1,13 +1,16 @@
 import sqlite3
 
-db = sqlite3.connect('expenses.db')
-cursor = db.cursor()
+db2 = sqlite3.connect('incomes.db')
+cursor = db2.cursor()
 
 cursor.execute('''
 
-    insert into expenses (id, value, category) values (1, 500, 'Sparkonto')
+    CREATE TABLE incomes (
+        value integer,
+        category string,
+        date integer)
 
 ''')
 
-db.commit()
-db.close()
+db2.commit()
+db2.close()

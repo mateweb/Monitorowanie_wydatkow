@@ -98,6 +98,9 @@ def show_statistics(month):
 
 # Add Income
 def add_income(month):
+
+    id2 = 0
+
     try:
         income_value = int(input('Wpisz wartosc przychodu [€]: '))
         print()
@@ -106,6 +109,21 @@ def add_income(month):
         income = (income_value, income_cat, month)
         incomes.append(income)
     
+        db2 = sqlite3.connect('incomes.db')
+
+        sql2 = """INSERT INTO incomes
+            (value, category, date) 
+            VALUES ('{}', '{}', '{}');""".format(
+                income_value, income_cat, d)
+
+        cursor2 = db2.cursor()
+        cursor2.execute(sql2)
+        db2.commit()
+        print('Zapisano w bazie!')
+        id2+= 1
+        cursor2.close()
+
+
     except ValueError:
         print()
         print('Wpisz poprawna kwote! ')
