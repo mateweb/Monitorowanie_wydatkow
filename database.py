@@ -1,14 +1,14 @@
 import sqlite3
 
-db = sqlite3.connect('expenses.db')
+db = sqlite3.connect('expenses3.db')
 cursor = db.cursor()
 
 cursor.execute('''
 
-    CREATE TABLE expenses (
-        id integer,
+    CREATE TABLE expenses3 (
         value integer,
-        category string)
+        category string,
+        date integer)
 
 ''')
 

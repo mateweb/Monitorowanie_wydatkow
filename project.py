@@ -8,9 +8,6 @@ from datetime import date, datetime
 
 # Variables
 
-db = sqlite3.connect('expenses.db')
-cursor = db.cursor()
-
 expenses = []
 incomes = []
 id = 0
@@ -26,6 +23,7 @@ def get_expenses(month):
 # Adding a new expense
 def add_expense(month):
     print()
+    id = 0
     try:
         expense_value = int(input('Podaj kwote wydatku [euro]: '))
         print()
@@ -34,14 +32,19 @@ def add_expense(month):
         expense = (expense_value, expense_cat, month)
         expenses.append(expense)
 
-        id = 0
+        db = sqlite3.connect('expenses3.db')
 
-        cursor.execute(f'''
+        sql = """INSERT INTO expenses3
+            (value, category, date) 
+            VALUES ('{}', '{}', '{}');""".format(
+                expense_value, expense_cat, d)
 
-            insert into expenses (id, value, category) values (
-                {id}, {expense_value}, '{expense_cat}')
-            ''')
+        cursor = db.cursor()
+        cursor.execute(sql)
+        db.commit()
+        print('Zapisano w bazie!')
         id+= 1
+        cursor.close()
 
     
     except ValueError:
