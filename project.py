@@ -30,9 +30,10 @@ def get_expenses(month):
         rows = cursor.fetchall() 
 
         for x in rows:
-            print('Wartosc: ', x[0])
+            print('Wartosc [€]: ', x[0])
             print('Kategoria: ', x[1])
             print('Data: ', x[2])
+            print('-' * 80)
             print()
 
         cursor.close()
@@ -43,7 +44,7 @@ def get_expenses(month):
     finally:
         if (db):
             db.close()
-            print('Dane z bazy danych zostaly pomyslnie pobrane. ')
+            print('Lista wydatkow zostala pomyslnie wczytana. ')
 
 
 
@@ -92,21 +93,50 @@ def add_expense(month):
 def delete_expenses(month):
     print(expenses)
     print()
+    #try:
+    #    user_delete = int(input('Wybierz pozycje do usuniecia [0,1,2,3 itd.] i nacisnij Enter: '))
+    #    del expenses[user_delete]
+    #    print()
+    #    message = print('Pomyslnie usunieto ')
+    #except ValueError:
+    #    print()
+    #    print('Wybierz poprawnie numer indeksu [Cyfra 0 oznacza pierwsza pozycje, cyfra 1 druga pozycje itd.]')
+    #except IndexError:
+    #    print()
+    #    print('Wybierz poprawnie numer indeksu [Cyfra 0 oznacza pierwsza pozycje, cyfra 1 druga pozycje itd.]')
+    #else:
+    #    print(message)
+    #    print()
+    #    print(expenses)
+    
     try:
-        user_delete = int(input('Wybierz pozycje do usuniecia [0,1,2,3 itd.] i nacisnij Enter: '))
-        del expenses[user_delete]
-        print()
-        message = print('Pomyslnie usunieto ')
-    except ValueError:
-        print()
-        print('Wybierz poprawnie numer indeksu [Cyfra 0 oznacza pierwsza pozycje, cyfra 1 druga pozycje itd.]')
-    except IndexError:
-        print()
-        print('Wybierz poprawnie numer indeksu [Cyfra 0 oznacza pierwsza pozycje, cyfra 1 druga pozycje itd.]')
-    else:
-        print(message)
-        print()
-        print(expenses)
+
+        db = sqlite3.connect('expenses3.db')
+        cursor = db.cursor()
+
+        sql3 = "SELECT rowid * FROM expenses3"
+
+        cursor.execute(sql3)
+        
+        rows = cursor.fetchall() 
+
+        for x in rows:
+            print('ID: ', )
+            print('Wartosc [€]: ', x[0])
+            print('Kategoria: ', x[1])
+            print('Data: ', x[2])
+            print('-' * 80)
+            print()
+
+        cursor.close()
+
+    except sqlite3.Error as e:
+        print('Blad, sprobuj ponownie. ', e)
+
+    finally:
+        if (db):
+            db.close()
+            print('Lista wydatkow zostala pomyslnie wczytana. ')
 
 
 # Statistics
@@ -170,8 +200,8 @@ def get_incomes(month):
 
     try:
 
-        db = sqlite3.connect('incomes.db')
-        cursor = db.cursor()
+        db2 = sqlite3.connect('incomes.db')
+        cursor = db2.cursor()
 
         sql4 = "SELECT * FROM incomes"
 
@@ -180,9 +210,10 @@ def get_incomes(month):
         rows = cursor.fetchall() 
 
         for x in rows:
-            print('Wartosc: ', x[0])
+            print('Wartosc [€]: ', x[0])
             print('Kategoria: ', x[1])
             print('Data: ', x[2])
+            print('-' * 80)
             print()
 
         cursor.close()
@@ -191,9 +222,9 @@ def get_incomes(month):
         print('Blad, sprobuj ponownie. ', e)
 
     finally:
-        if (db):
-            db.close()
-            print('Dane z bazy danych zostaly pomyslnie pobrane. ')
+        if (db2):
+            db2.close()
+            print('Lista przychodow zostala pomyslnie wczytana. ')
 
 # Main while
 #TASK - by user_input '123231313' does not returning to beginning
@@ -219,11 +250,11 @@ while True:
     while True:
         print()
         print("0. Powrót do wyboru daty")
-        print("1. Przeglądaj bieżące wydatki")
+        print("1. Przeglądaj wydatki")
         print("2. Dodaj wydatek")
         print("3. Usuń wydatek")
-        print("4. Dodaj przychod")
-        print("5. Przegladaj przychody")
+        print("4. Przegladaj przychody")
+        print("5. Dodaj przychod")
         print("6. Statystyki")
         print("7. Zamknij program")
         print()
@@ -255,16 +286,16 @@ while True:
                 delete_expenses(month)
 
             if user_choice == 4:
-                print('Dodaj nowy przychod')
-                print('------------------------------')
-                print()
-                add_income(month)
-
-            if user_choice == 5:
                 print('Przeglad aktualnych przychodow')
                 print('------------------------------')
                 print()
                 get_incomes(month)
+
+            if user_choice == 5:
+                print('Dodaj nowy przychod')
+                print('------------------------------')
+                print()
+                add_income(month)
         
             if user_choice == 6:
                 print("Statystyki")
