@@ -111,19 +111,22 @@ def delete_expenses(month):
         db = sqlite3.connect('expenses3.db')
         cursor = db.cursor()
 
-        sql3 = "SELECT rowid * FROM expenses3"
+        sql3 = "SELECT rowid, * FROM expenses3"
 
         cursor.execute(sql3)
         
         rows = cursor.fetchall() 
 
         for x in rows:
-            print('ID: ', )
-            print('Wartosc [€]: ', x[0])
-            print('Kategoria: ', x[1])
-            print('Data: ', x[2])
+            print('ID: ', x[0])
+            print('Wartosc [€]: ', x[1])
+            print('Kategoria: ', x[2])
+            print('Data: ', x[3])
             print('-' * 80)
             print()
+
+        user_delete = int(input('Wybierz pozycje do usuniecia [0,1,2,3 itd.] i nacisnij Enter: '))
+        cursor.execute('DELETE FROM expenses3 WHERE rowid = user_delete')
 
         cursor.close()
 
