@@ -15,9 +15,37 @@ id = 0
 
 # Printing all expenses
 def get_expenses(month):
-    for expense_value, expense_cat, expense_month in expenses:
-        if expense_month == month:
-            print(f'{expense_value}€ - {expense_cat} - {d} ')
+    #for expense_value, expense_cat, expense_month in expenses:
+    #    if expense_month == month:
+    #        print(f'{expense_value}€ - {expense_cat} - {d} ')
+    try:
+
+        db = sqlite3.connect('expenses3.db')
+        cursor = db.cursor()
+
+        sql3 = "SELECT * FROM expenses3"
+
+        cursor.execute(sql3)
+        
+        rows = cursor.fetchall() 
+
+        for x in rows:
+            print('Wartosc: ', x[0])
+            print('Kategoria: ', x[1])
+            print('Data: ', x[2])
+            print()
+
+        cursor.close()
+
+    except sqlite3.Error as e:
+        print('Blad, sprobuj ponownie. ', e)
+
+    finally:
+        if (db):
+            db.close()
+            print('Dane z bazy danych zostaly pomyslnie pobrane. ')
+
+
 
 
 # Adding a new expense
@@ -119,6 +147,7 @@ def add_income(month):
         cursor2 = db2.cursor()
         cursor2.execute(sql2)
         db2.commit()
+        print()
         print('Zapisano w bazie!')
         id2+= 1
         cursor2.close()
@@ -135,11 +164,36 @@ def add_income(month):
 
 # Show Incomes
 def get_incomes(month):
-    for income_value, income_cat, income_month in incomes:
-        if income_month == month:
-            print(f'{income_value }€ - {income_cat} - {d}')
+    #for income_value, income_cat, income_month in incomes:
+    #    if income_month == month:
+    #        print(f'{income_value }€ - {income_cat} - {d}')
 
+    try:
 
+        db = sqlite3.connect('incomes.db')
+        cursor = db.cursor()
+
+        sql4 = "SELECT * FROM incomes"
+
+        cursor.execute(sql4)
+        
+        rows = cursor.fetchall() 
+
+        for x in rows:
+            print('Wartosc: ', x[0])
+            print('Kategoria: ', x[1])
+            print('Data: ', x[2])
+            print()
+
+        cursor.close()
+
+    except sqlite3.Error as e:
+        print('Blad, sprobuj ponownie. ', e)
+
+    finally:
+        if (db):
+            db.close()
+            print('Dane z bazy danych zostaly pomyslnie pobrane. ')
 
 # Main while
 #TASK - by user_input '123231313' does not returning to beginning
