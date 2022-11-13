@@ -1,4 +1,3 @@
-
 import sys
 import sqlite3
 import datetime
@@ -18,6 +17,7 @@ def get_expenses(month):
     #for expense_value, expense_cat, expense_month in expenses:
     #    if expense_month == month:
     #        print(f'{expense_value}€ - {expense_cat} - {d} ')
+    
     try:
 
         db = sqlite3.connect('expenses3.db')
@@ -47,8 +47,6 @@ def get_expenses(month):
             print('Lista wydatkow zostala pomyslnie wczytana. ')
 
 
-
-
 # Adding a new expense
 def add_expense(month):
     print()
@@ -74,7 +72,6 @@ def add_expense(month):
         print('Zapisano w bazie!')
         id+= 1
         cursor.close()
-
     
     except ValueError:
         print()
@@ -88,11 +85,11 @@ def add_expense(month):
         db.close()
 
        
-
 # Delete expenses
 def delete_expenses(month):
     print(expenses)
     print()
+    
     #try:
     #    user_delete = int(input('Wybierz pozycje do usuniecia [0,1,2,3 itd.] i nacisnij Enter: '))
     #    del expenses[user_delete]
@@ -182,7 +179,6 @@ def add_income(month):
         id2+= 1
         cursor2.close()
 
-
     except ValueError:
         print()
         print('Wpisz poprawna kwote! ')
@@ -199,7 +195,6 @@ def get_incomes(month):
     #        print(f'{income_value }€ - {income_cat} - {d}')
 
     try:
-
         db2 = sqlite3.connect('incomes.db')
         cursor = db2.cursor()
 
@@ -225,6 +220,7 @@ def get_incomes(month):
         if (db2):
             db2.close()
             print('Lista przychodow zostala pomyslnie wczytana. ')
+
 
 # Main while
 #TASK - by user_input '123231313' does not returning to beginning
@@ -266,7 +262,6 @@ while True:
             if user_choice == 0:
                 break
         
-       
             if user_choice == 1:
                 print("Przegląd aktualnych kosztów")
                 print("------------------------------")
