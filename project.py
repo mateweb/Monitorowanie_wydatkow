@@ -110,10 +110,7 @@ def delete_expenses(month):
 
         db = sqlite3.connect('expenses3.db')
         cursor = db.cursor()
-    
-        sql3 = '''DELETE FROM expenses3 WHERE rowid = ?;''', (id,)
 
-        cursor.execute(sql3)
         rows = cursor.fetchall() 
 
         for x in rows:
@@ -123,6 +120,12 @@ def delete_expenses(month):
             print('Data: ', x[4])
             print('-' * 80)
             print()
+
+
+        sql3 = '''DELETE FROM expenses3 WHERE rowid = ?;''', (id,)
+
+        cursor.execute(sql3)
+
 
         cursor.close()
 
@@ -240,7 +243,10 @@ while True:
         if month == 0:
             break
     except ValueError: 
-            print('Wybrano bledny miesiac!')
+            print()
+            print('Wybrano bledny miesiac! Powroc do wyboru miesiaca.')
+            continue
+            
         
         
 # Secondary while
