@@ -6,6 +6,7 @@ cursor = db.cursor()
 cursor.execute('''
 
     CREATE TABLE expenses3 (
+        id integer PRIMARY KEY NOT NULL,
         value integer,
         category string,
         date integer)
