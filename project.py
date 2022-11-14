@@ -4,13 +4,11 @@ import datetime
 
 from datetime import date, datetime
 
-
 # Variables
 
 expenses = []
 incomes = []
 id = 0
-
 
 # Printing all expenses
 def get_expenses(month):
@@ -126,7 +124,6 @@ def delete_expenses(month):
 
         cursor.execute(sql3)
 
-
         cursor.close()
 
     except sqlite3.Error as e:
@@ -225,9 +222,7 @@ def get_incomes(month):
             db2.close()
             print('Lista przychodow zostala pomyslnie wczytana. ')
 
-
-# Main while
-#TASK - by user_input '123231313' does not returning to beginning
+#MainWhile
 while True:
     try:
         year = int(input('Podaj rok: '))
@@ -245,9 +240,9 @@ while True:
     except ValueError: 
             print()
             print('Wybrano bledny miesiac! Powroc do wyboru miesiaca.')
+            print()
             continue
             
-        
         
 # Secondary while
     while True:
