@@ -28,9 +28,10 @@ def get_expenses(month):
         rows = cursor.fetchall() 
 
         for x in rows:
-            print('Wartosc [€]: ', x[0])
-            print('Kategoria: ', x[1])
-            print('Data: ', x[2])
+            print('ID: ', x[0])
+            print('Wartosc [€]: ', x[1])
+            print('Kategoria: ', x[2])
+            print('Data: ', x[3])
             print('-' * 80)
             print()
 
@@ -62,7 +63,7 @@ def add_expense(month):
         sql = """INSERT INTO expenses3
             (value, category, date) 
             VALUES ('{}', '{}', '{}');""".format(
-                expense_value, expense_cat, d)
+                 expense_value, expense_cat, d)
 
         cursor = db.cursor()
         cursor.execute(sql)
@@ -112,15 +113,19 @@ def delete_expenses(month):
         rows = cursor.fetchall() 
 
         for x in rows:
-            print('ID: ', x[1])
-            print('Wartosc [€]: ', x[2])
-            print('Kategoria: ', x[3])
-            print('Data: ', x[4])
+            print('ID: ', x[0])
+            print('Wartosc [€]: ', x[1])
+            print('Kategoria: ', x[2])
+            print('Data: ', x[3])
             print('-' * 80)
             print()
 
+            cursor.close()
 
-        sql3 = '''DELETE FROM expenses3 WHERE rowid = ?;''', (id,)
+        id = int(input('Wybierz pozycje do usuniecia [1,2,3 etc.] i nacisnij Enter: '))
+        sql3 = 'DELETE FROM expenses3 WHERE rowid = ?'
+        id == sql3
+        
 
         cursor.execute(sql3)
 
@@ -130,6 +135,20 @@ def delete_expenses(month):
         print()
         print('Blad, sprobuj ponownie. ', e)
         print()
+
+        cursor = db.cursor()
+
+        rows = cursor.fetchall() 
+
+        for x in rows:
+            print('ID: ', x[0])
+            print('Wartosc [€]: ', x[1])
+            print('Kategoria: ', x[2])
+            print('Data: ', x[3])
+            print('-' * 80)
+            print()
+
+            cursor.close()
 
     finally:
         if (db):
