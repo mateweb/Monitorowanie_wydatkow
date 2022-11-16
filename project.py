@@ -9,6 +9,7 @@ from datetime import date, datetime
 expenses = []
 incomes = []
 id = 0
+id2 = 0
 
 # PrintingAllExpenses
 def get_expenses(month):
@@ -125,7 +126,6 @@ def show_statistics(month):
 def add_income(month):
 
     id2 = 0
-
     try:
         income_value = int(input('Wpisz wartosc przychodu [€]: '))
         print()
@@ -139,7 +139,7 @@ def add_income(month):
         sql2 = """INSERT INTO incomes
             (value, category, date) 
             VALUES ('{}', '{}', '{}');""".format(
-                id2, income_value, income_cat, d)
+                income_value, income_cat, d)
 
         cursor2 = db2.cursor()
         cursor2.execute(sql2)
@@ -163,15 +163,15 @@ def get_incomes(month):
    
     try:
         db2 = sqlite3.connect('incomes.db')
-        cursor = db2.cursor()
+        cursor2 = db2.cursor()
 
         sql4 = "SELECT * FROM incomes"
 
-        cursor.execute(sql4)
+        cursor2.execute(sql4)
         
-        rows = cursor.fetchall() 
+        rows2 = cursor2.fetchall() 
 
-        for x in rows:
+        for x in rows2:
             print('ID: ', x[0])
             print('Wartosc [€]: ', x[1])
             print('Kategoria: ', x[2])
@@ -179,7 +179,7 @@ def get_incomes(month):
             print('-' * 80)
             print()
 
-        cursor.close()
+        cursor2.close()
 
     except sqlite3.Error as e:
         print('Blad, sprobuj ponownie. ', e)
@@ -197,10 +197,10 @@ def deleteIncomes(month):
         db2 = sqlite3.connect('incomes.db') 
         userInput2 = int(input("Wpisz ID do usuniecia: "))
         print()
-        cursor = db2.cursor()
+        cursor2 = db2.cursor()
 
-        cursor.execute(f'DELETE FROM incomes WHERE id2= {userInput2}')
-        cursor.close()
+        cursor2.execute(f'DELETE FROM incomes WHERE id2= {userInput2}')
+        cursor2.close()
         db2.commit()
         db2.close()
         
