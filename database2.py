@@ -6,6 +6,7 @@ cursor = db2.cursor()
 cursor.execute('''
 
     CREATE TABLE incomes (
+        id integer PRIMARY KEY NOT NULL,
         value integer,
         category string,
         date integer)

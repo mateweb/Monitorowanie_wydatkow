@@ -10,11 +10,8 @@ expenses = []
 incomes = []
 id = 0
 
-# Printing all expenses
+# PrintingAllExpenses
 def get_expenses(month):
-    #for expense_value, expense_cat, expense_month in expenses:
-    #    if expense_month == month:
-    #        print(f'{expense_value}€ - {expense_cat} - {d} ')
     
     try:
 
@@ -46,7 +43,7 @@ def get_expenses(month):
             print('Lista wydatkow zostala pomyslnie wczytana. ')
 
 
-# Adding a new expense
+# AddingANewExpense
 def add_expense(month):
     print()
     id = 0
@@ -84,76 +81,29 @@ def add_expense(month):
         db.close()
 
        
-# Delete expenses
+# DeleteExpenses
 def delete_expenses(month):
-    print(expenses)
-    print()
-    
-    #try:
-    #    user_delete = int(input('Wybierz pozycje do usuniecia [0,1,2,3 itd.] i nacisnij Enter: '))
-    #    del expenses[user_delete]
-    #    print()
-    #    message = print('Pomyslnie usunieto ')
-    #except ValueError:
-    #    print()
-    #    print('Wybierz poprawnie numer indeksu [Cyfra 0 oznacza pierwsza pozycje, cyfra 1 druga pozycje itd.]')
-    #except IndexError:
-    #    print()
-    #    print('Wybierz poprawnie numer indeksu [Cyfra 0 oznacza pierwsza pozycje, cyfra 1 druga pozycje itd.]')
-    #else:
-    #    print(message)
-    #    print()
-    #    print(expenses)
     
     try:
-
-        db = sqlite3.connect('expenses3.db')
+         
+        db = sqlite3.connect('expenses3.db') 
+        userInput = int(input("Wpisz ID do usuniecia: "))
         cursor = db.cursor()
 
-        rows = cursor.fetchall() 
-
-        for x in rows:
-            print('ID: ', x[0])
-            print('Wartosc [€]: ', x[1])
-            print('Kategoria: ', x[2])
-            print('Data: ', x[3])
-            print('-' * 80)
-            print()
-
-            cursor.close()
-
-        id = int(input('Wybierz pozycje do usuniecia [1,2,3 etc.] i nacisnij Enter: '))
-        sql3 = 'DELETE FROM expenses3 WHERE rowid = ?'
-        id == sql3
+        cursor.execute(f'DELETE FROM expenses3 WHERE id= {userInput}')
+        cursor.close()
+        db.commit()
+        db.close()
         
 
-        cursor.execute(sql3)
-
-        cursor.close()
-
     except sqlite3.Error as e:
-        print()
         print('Blad, sprobuj ponownie. ', e)
         print()
-
-        cursor = db.cursor()
-
-        rows = cursor.fetchall() 
-
-        for x in rows:
-            print('ID: ', x[0])
-            print('Wartosc [€]: ', x[1])
-            print('Kategoria: ', x[2])
-            print('Data: ', x[3])
-            print('-' * 80)
-            print()
-
-            cursor.close()
 
     finally:
         if (db):
             db.close()
-            print('Lista wydatkow zostala pomyslnie wczytana. ')
+            print('Pomyslnie usunieto. ') 
 
 
 # Statistics
@@ -171,7 +121,7 @@ def show_statistics(month):
     print('Laczna ilosc wydatkow w tym roku [€]: ', summ_all_expense)
 
 
-# Add Income
+# AddIncome
 def add_income(month):
 
     id2 = 0
@@ -189,7 +139,7 @@ def add_income(month):
         sql2 = """INSERT INTO incomes
             (value, category, date) 
             VALUES ('{}', '{}', '{}');""".format(
-                income_value, income_cat, d)
+                id2, income_value, income_cat, d)
 
         cursor2 = db2.cursor()
         cursor2.execute(sql2)
@@ -208,12 +158,9 @@ def add_income(month):
         print()
 
 
-# Show Incomes
+# ShowIncomes
 def get_incomes(month):
-    #for income_value, income_cat, income_month in incomes:
-    #    if income_month == month:
-    #        print(f'{income_value }€ - {income_cat} - {d}')
-
+   
     try:
         db2 = sqlite3.connect('incomes.db')
         cursor = db2.cursor()
@@ -225,9 +172,10 @@ def get_incomes(month):
         rows = cursor.fetchall() 
 
         for x in rows:
-            print('Wartosc [€]: ', x[0])
-            print('Kategoria: ', x[1])
-            print('Data: ', x[2])
+            print('ID: ', x[0])
+            print('Wartosc [€]: ', x[1])
+            print('Kategoria: ', x[2])
+            print('Date: ', x[3])
             print('-' * 80)
             print()
 
@@ -241,7 +189,32 @@ def get_incomes(month):
             db2.close()
             print('Lista przychodow zostala pomyslnie wczytana. ')
 
-#MainWhile
+# DeleteIncomes
+def deleteIncomes(month):
+
+    try:
+         
+        db2 = sqlite3.connect('incomes.db') 
+        userInput2 = int(input("Wpisz ID do usuniecia: "))
+        print()
+        cursor = db2.cursor()
+
+        cursor.execute(f'DELETE FROM incomes WHERE id2= {userInput2}')
+        cursor.close()
+        db2.commit()
+        db2.close()
+        
+
+    except sqlite3.Error as e:
+        print('Blad, sprobuj ponownie. ', e)
+        print()
+
+    finally:
+        if (db2):
+            db2.close()
+            print('Pomyslnie usunieto. ') 
+
+# MainWhile
 while True:
     try:
         year = int(input('Podaj rok: '))
@@ -272,8 +245,9 @@ while True:
         print("3. Usuń wydatek")
         print("4. Przegladaj przychody")
         print("5. Dodaj przychod")
-        print("6. Statystyki")
-        print("7. Zamknij program")
+        print("6. Usun przychod")
+        print("7. Statystyki")
+        print("8. Zamknij program")
         print()
         
         try:
@@ -312,14 +286,20 @@ while True:
                 print('------------------------------')
                 print()
                 add_income(month)
-        
+
             if user_choice == 6:
+                print('Usun przychod')
+                print('------------------------------')
+                print()
+                deleteIncomes(month)
+        
+            if user_choice == 7:
                 print("Statystyki")
                 print("------------------------------")
                 print()
                 show_statistics(month)
         
-            if user_choice == 7:
+            if user_choice == 8:
                 sys.exit(0)
        
         except ValueError:
