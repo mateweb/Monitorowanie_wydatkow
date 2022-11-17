@@ -214,6 +214,7 @@ def deleteIncomes(month):
             db2.close()
             print('Pomyslnie usunieto. ') 
 
+
 # MainWhile
 while True:
     try:
