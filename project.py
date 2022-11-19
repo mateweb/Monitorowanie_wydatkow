@@ -134,20 +134,20 @@ def add_income(month):
         income = (income_value, income_cat, month)
         incomes.append(income)
     
-        db2 = sqlite3.connect('incomes.db')
+        db = sqlite3.connect('incomes.db')
 
         sql2 = """INSERT INTO incomes
             (value, category, date) 
             VALUES ('{}', '{}', '{}');""".format(
                 income_value, income_cat, d)
 
-        cursor2 = db2.cursor()
-        cursor2.execute(sql2)
-        db2.commit()
+        cursor = db.cursor()
+        cursor.execute(sql2)
+        db.commit()
         print()
         print('Zapisano w bazie!')
         id2+= 1
-        cursor2.close()
+        cursor.close()
 
     except ValueError:
         print()
@@ -162,14 +162,14 @@ def add_income(month):
 def get_incomes(month):
    
     try:
-        db2 = sqlite3.connect('incomes.db')
-        cursor2 = db2.cursor()
+        db = sqlite3.connect('incomes.db')
+        cursor = db.cursor()
 
         sql4 = "SELECT * FROM incomes"
 
-        cursor2.execute(sql4)
+        cursor.execute(sql4)
         
-        rows2 = cursor2.fetchall() 
+        rows2 = cursor.fetchall() 
 
         for x in rows2:
             print('ID: ', x[0])
@@ -179,14 +179,14 @@ def get_incomes(month):
             print('-' * 80)
             print()
 
-        cursor2.close()
+        cursor.close()
 
     except sqlite3.Error as e:
         print('Blad, sprobuj ponownie. ', e)
 
     finally:
-        if (db2):
-            db2.close()
+        if (db):
+            db.close()
             print('Lista przychodow zostala pomyslnie wczytana. ')
 
 # DeleteIncomes
@@ -194,15 +194,15 @@ def deleteIncomes(month):
 
     try:
          
-        db2 = sqlite3.connect('incomes.db') 
+        db = sqlite3.connect('incomes.db') 
         userInput2 = int(input("Wpisz ID do usuniecia: "))
         print()
-        cursor2 = db2.cursor()
+        cursor = db.cursor()
 
-        cursor2.execute(f'DELETE FROM incomes WHERE id2= {userInput2}')
-        cursor2.close()
-        db2.commit()
-        db2.close()
+        cursor.execute(f'DELETE FROM incomes WHERE id2= {userInput2}')
+        cursor.close()
+        db.commit()
+        db.close()
         
 
     except sqlite3.Error as e:
@@ -210,8 +210,8 @@ def deleteIncomes(month):
         print()
 
     finally:
-        if (db2):
-            db2.close()
+        if (db):
+            db.close()
             print('Pomyslnie usunieto. ') 
 
 
