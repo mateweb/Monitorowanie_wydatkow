@@ -18,7 +18,11 @@ def get_expenses(month):
         db = sqlite3.connect('expenses_and_incomes.db')
         cursor = db.cursor()
 
-        sql3 = "SELECT * FROM expenses WHERE strftime('%m', date)", month
+        sql3 = """
+        SELECT date
+        FROM expenses
+        WHERE STRFTIME("%m", date) = "%m"
+        """
 
         cursor.execute(sql3)
         
