@@ -1,15 +1,26 @@
 import sqlite3
 
-db = sqlite3.connect('expenses3.db')
+db = sqlite3.connect('expenses_and_incomes.db')
 cursor = db.cursor()
+cursor2 = db.cursor()
 
 cursor.execute('''
 
-    CREATE TABLE expenses3 (
-        id integer PRIMARY KEY NOT NULL,
-        value integer,
-        category string,
-        date integer)
+    CREATE TABLE IF NOT EXISTS expenses(
+	id integer PRIMARY KEY NOT NULL,
+	value integer,
+    category string,
+    date integer);
+    
+''')
+
+cursor2.execute('''
+
+    CREATE TABLE IF NOT EXISTS incomes(
+	id integer PRIMARY KEY NOT NULL,
+	value integer,
+    category string,
+    date integer);
 
 ''')
 
