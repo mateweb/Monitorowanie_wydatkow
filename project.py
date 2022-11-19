@@ -9,7 +9,6 @@ from datetime import date, datetime
 expenses = []
 incomes = []
 id = 0
-id2 = 0
 
 # PrintingAllExpenses
 def get_expenses(month):
@@ -112,17 +111,28 @@ def delete_expenses(month):
 
 # Statistics
 def show_statistics(month):
-   
-    summ_value_month = sum(expense_value for expense_value, _, expense_month in expenses if expense_month == month)
-    summ_all_expense = sum(expense_value for expense_value, _, _, in expenses)
-    summ_all_income = sum(income_value for income_value, _, _, in incomes) 
-    diff = summ_all_income - summ_all_expense
 
-    print('Aktualny balans [€]: ', diff)
-    print('Najdrozszy wydatek dotychczas [€]: ', max(expenses))
-    print('Najwyzszy przychod dotychczas [€]: ', max(incomes))
-    print('Laczna suma wydatkow w tym miesiacu wynosi [€]: ', summ_value_month)
-    print('Laczna ilosc wydatkow w tym roku [€]: ', summ_all_expense)
+    db = sqlite3.connect('expenses_and_incomes.db')
+    cursor = db.cursor()
+
+    sumValueMonth = ("SELECT SUM(value) FROM expenses")
+    cursor.execute(sumValueMonth)
+
+    cursor.close()
+
+    db.commit()
+    db.close()
+
+
+    #summ_value_month = sum(expense_value for expense_value, _, expense_month in expenses if expense_month == month)
+    #summ_all_expense = sum(expense_value for expense_value, _, _, in expenses)
+    #summ_all_income = sum(income_value for income_value, _, _, in incomes) 
+    #diff = summ_all_income - summ_all_expense
+
+    #print('Aktualny balans [€]: ', diff)
+    #print('Najdrozszy wydatek dotychczas [€]: ', max(expenses))
+    #print('Najwyzszy przychod dotychczas [€]: ', max(incomes))
+    #print('Laczna ilosc wydatkow w tym roku [€]: ', summ_all_expense)
 
 
 # AddIncome
