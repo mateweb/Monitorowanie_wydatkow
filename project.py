@@ -18,7 +18,7 @@ def get_expenses(month):
         db = sqlite3.connect('expenses_and_incomes.db')
         cursor = db.cursor()
 
-        sql3 = "SELECT * FROM expenses"
+        sql3 = "SELECT * FROM expenses WHERE strftime('%m', date)", month
 
         cursor.execute(sql3)
         
@@ -59,9 +59,9 @@ def add_expense(month):
         db = sqlite3.connect('expenses_and_incomes.db')
 
         sql = """INSERT INTO expenses
-            (value, category, date) 
-            VALUES ('{}', '{}', '{}');""".format(
-                 expense_value, expense_cat, d)
+            (value, category) 
+            VALUES ('{}', '{}');""".format(
+                 expense_value, expense_cat)
 
         cursor = db.cursor()
         cursor.execute(sql)
@@ -115,8 +115,17 @@ def show_statistics(month):
     db = sqlite3.connect('expenses_and_incomes.db')
     cursor = db.cursor()
 
-    sumValueMonth = ("SELECT SUM(value) FROM expenses")
-    cursor.execute(sumValueMonth)
+    sumValuesMonth = "SELECT SUM(value) FROM expenses WHERE date"
+    cursor.execute(sumValuesMonth)
+    getSum = cursor.fetchall()
+    print('Suma aktualnych wydatkow wynosi: ', getSum, '€')
+
+    avgValuesMonth = "SELECT AVG(value) FROM expenses"
+    cursor.execute(avgValuesMonth)
+    getAvg = cursor.fetchall()
+    print('Sredni wydatek wynosi aktualnie: ', getAvg, '€')
+
+
 
     cursor.close()
 
@@ -150,9 +159,9 @@ def add_income(month):
         db = sqlite3.connect('expenses_and_incomes.db')
 
         sql2 = """INSERT INTO incomes
-            (value, category, date) 
-            VALUES ('{}', '{}', '{}');""".format(
-                income_value, income_cat, d)
+            (value, category) 
+            VALUES ('{}', '{}' );""".format(
+                income_value, income_cat)
 
         cursor2 = db.cursor()
         cursor2.execute(sql2)
@@ -231,15 +240,15 @@ def deleteIncomes(month):
 # MainWhile
 while True:
     try:
-        year = int(input('Podaj rok: '))
-        print()
+        #year = int(input('Podaj rok: '))
+        #print()
         month = int(input("Podaj miesiac [1-12]: "))
-        print()
-        day = int(input('Podaj dzien: '))
-        print()
+        #print()
+        #day = int(input('Podaj dzien: '))
+        #print()
 
-        d = date(year, month, day)
-        print(d)
+        #d = date(year, month, day)
+        #print(d)
 
         if month == 0:
             break

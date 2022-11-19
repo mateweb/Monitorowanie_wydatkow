@@ -10,7 +10,7 @@ cursor.execute('''
 	id integer PRIMARY KEY NOT NULL,
 	value integer,
     category string,
-    date integer);
+    date DATETIME DEFAULT CURRENT_TIMESTAMP);
     
 ''')
 
@@ -20,9 +20,11 @@ cursor2.execute('''
 	id integer PRIMARY KEY NOT NULL,
 	value integer,
     category string,
-    date integer);
+    date DATETIME DEFAULT CURRENT_TIMESTAMP);
 
 ''')
+
+
 
 db.commit()
 db.close()
