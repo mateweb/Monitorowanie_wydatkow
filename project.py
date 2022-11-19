@@ -1,6 +1,7 @@
 import sys
 import sqlite3
 import datetime
+import os
 
 from datetime import date, datetime
 
@@ -14,15 +15,12 @@ id = 0
 def get_expenses(month):
     
     try:
+        os.system('clear')
 
         db = sqlite3.connect('expenses_and_incomes.db')
         cursor = db.cursor()
 
-        sql3 = """
-        SELECT date
-        FROM expenses
-        WHERE STRFTIME("%m", date) = "%m"
-        """
+        sql3 = "SELECT * FROM expenses"
 
         cursor.execute(sql3)
         
@@ -63,9 +61,9 @@ def add_expense(month):
         db = sqlite3.connect('expenses_and_incomes.db')
 
         sql = """INSERT INTO expenses
-            (value, category) 
-            VALUES ('{}', '{}');""".format(
-                 expense_value, expense_cat)
+            (value, category, date) 
+            VALUES ('{}', '{}', '{}');""".format(
+                 expense_value, expense_cat, d)
 
         cursor = db.cursor()
         cursor.execute(sql)
@@ -115,25 +113,14 @@ def delete_expenses(month):
 
 # Statistics
 def show_statistics(month):
-
+    os.system('clear')
     db = sqlite3.connect('expenses_and_incomes.db')
     cursor = db.cursor()
-
-    sumValuesMonth = "SELECT SUM(value) FROM expenses WHERE date"
-    cursor.execute(sumValuesMonth)
-    getSum = cursor.fetchall()
-    print('Suma aktualnych wydatkow wynosi: ', getSum, '€')
-
-    avgValuesMonth = "SELECT AVG(value) FROM expenses"
-    cursor.execute(avgValuesMonth)
-    getAvg = cursor.fetchall()
-    print('Sredni wydatek wynosi aktualnie: ', getAvg, '€')
-
-
-
+    sumValueMonth = ("SELECT SUM(value) FROM expenses WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
+    cursor.execute(sumValueMonth)
+    sum = cursor.fetchall() 
+    print('Suma wydatków: ', sum)
     cursor.close()
-
-    db.commit()
     db.close()
 
 
@@ -163,9 +150,9 @@ def add_income(month):
         db = sqlite3.connect('expenses_and_incomes.db')
 
         sql2 = """INSERT INTO incomes
-            (value, category) 
-            VALUES ('{}', '{}' );""".format(
-                income_value, income_cat)
+            (value, category, date) 
+            VALUES ('{}', '{}', '{}');""".format(
+                income_value, income_cat, d)
 
         cursor2 = db.cursor()
         cursor2.execute(sql2)
@@ -188,11 +175,11 @@ def add_income(month):
 def get_incomes(month):
    
     try:
+        os.system('clear')
         db = sqlite3.connect('expenses_and_incomes.db')
         cursor2 = db.cursor()
-
-        sql4 = "SELECT * FROM incomes"
-
+        sql4 = ("SELECT * FROM incomes WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
+            # sumValueMonth = ("SELECT SUM(value) FROM expenses WHERE strftime('%m', date) = " +"'"+ str(currentMonth)+"'")
         cursor2.execute(sql4)
         
         rows2 = cursor2.fetchall() 
@@ -244,15 +231,15 @@ def deleteIncomes(month):
 # MainWhile
 while True:
     try:
-        #year = int(input('Podaj rok: '))
-        #print()
+        year = int(input('Podaj rok: '))
+        print()
         month = int(input("Podaj miesiac [1-12]: "))
-        #print()
-        #day = int(input('Podaj dzien: '))
-        #print()
+        print()
+        day = int(input('Podaj dzien: '))
+        print()
 
-        #d = date(year, month, day)
-        #print(d)
+        d = date(year, month, day)
+        print(d)
 
         if month == 0:
             break
