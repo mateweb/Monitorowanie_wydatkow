@@ -119,21 +119,9 @@ def show_statistics(month):
     sumValueMonth = ("SELECT SUM(value) FROM expenses WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
     cursor.execute(sumValueMonth)
     sum = cursor.fetchall() 
-    print('Suma wydatków: ', sum)
+    print('Suma wydatków w miesiącu: ', sum)
     cursor.close()
     db.close()
-
-
-    #summ_value_month = sum(expense_value for expense_value, _, expense_month in expenses if expense_month == month)
-    #summ_all_expense = sum(expense_value for expense_value, _, _, in expenses)
-    #summ_all_income = sum(income_value for income_value, _, _, in incomes) 
-    #diff = summ_all_income - summ_all_expense
-
-    #print('Aktualny balans [€]: ', diff)
-    #print('Najdrozszy wydatek dotychczas [€]: ', max(expenses))
-    #print('Najwyzszy przychod dotychczas [€]: ', max(incomes))
-    #print('Laczna ilosc wydatkow w tym roku [€]: ', summ_all_expense)
-
 
 # AddIncome
 def add_income(month):
