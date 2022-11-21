@@ -234,41 +234,50 @@ def testDefinition():
     os.system('clear')
     print('WYDATKI: ')
     print('---------------------------------------------------------------------------------------------')
+    
     db = sqlite3.connect('expenses_and_incomes.db')
     cursor = db.cursor()
+    
     sumExpenseMonth = ("SELECT sum(value) FROM expenses WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
     cursor.execute(sumExpenseMonth)
     sumExpenseMonth = cursor.fetchone()[0]
     print('Suma wydatków w tym miesiacu:',sumExpenseMonth,'€')
     print()
+    
     avgExpenseMonth = ("SELECT avg(value) FROM expenses WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
     cursor.execute(avgExpenseMonth)
     avgExpenseMonth = cursor.fetchone()[0]
     print('Srednia wydatków w tym miesiacu:',int(avgExpenseMonth),'€')
     print()
+    
     sumExpenses = ("SELECT sum(value) FROM expenses")
     cursor.execute(sumExpenses)
     sumExpenses = cursor.fetchone()[0]
     print('Suma wydatków w tym roku:',sumExpenses,'€')
     print()
+    
     print()    
     print('PRZYCHODY: ')
     print('---------------------------------------------------------------------------------------------')
+    
     sumIncomeMonth = ("SELECT sum(value) FROM incomes WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
     cursor.execute(sumIncomeMonth)
     sumIncomeMonth = cursor.fetchone()[0]
     print('Suma przychodow w tym miesiacu:',sumIncomeMonth,'€')
     print()
+    
     avgIncomeMonth = ("SELECT avg(value) FROM incomes WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
     cursor.execute(avgIncomeMonth)
     avgIncomeMonth = cursor.fetchone()[0]
     print('Srednia przychodow w tym miesiacu:',int(avgIncomeMonth),'€')
     print()
+    
     sumIncomes = ("SELECT sum(value) FROM incomes")
     cursor.execute(sumIncomes)
     sumIncomes = cursor.fetchone()[0]
     print('Suma przychodow w tym roku:',sumIncomes,'€')
     print()
+    
     cursor.close()
     db.close()
 
@@ -311,7 +320,7 @@ while True:
         print()
         
         try:
-            user_choice = int(input("Wybierz pozycję z menu [0-5] i naciśnij Enter: "))
+            user_choice = int(input("Wybierz pozycję z menu [0-9] i naciśnij Enter: "))
             print()
 
             if user_choice == 0:
