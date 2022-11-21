@@ -202,6 +202,7 @@ def get_incomes(month):
             db.close()
             print('Lista przychodow zostala pomyslnie wczytana. ')
 
+
 # DeleteIncomes
 def deleteIncomes(month):
 
@@ -226,6 +227,25 @@ def deleteIncomes(month):
         if (db):
             db.close()
             print('Pomyslnie usunieto. ') 
+
+
+# TestDefinition
+def testDefinition():
+    os.system('clear')
+    db = sqlite3.connect('expenses_and_incomes.db')
+    cursor = db.cursor()
+    sumValueMonth = ("SELECT sum(value) FROM expenses WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
+    cursor.execute(sumValueMonth)
+    sumValueMonth = cursor.fetchall()[0]
+    print('Suma wydatków w tym miesiacu: ', sumValueMonth, '€')
+    print()
+    avgValueMonth = ("SELECT avg(value) FROM expenses WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
+    cursor.execute(avgValueMonth)
+    avgValueMonth = cursor.fetchall()[0]
+    print('Srednia wydatków w tym miesiacu: ', avgValueMonth, '€')
+    print()
+    cursor.close()
+    db.close()
 
 
 # MainWhile
@@ -262,6 +282,7 @@ while True:
         print("6. Usun przychod")
         print("7. Statystyki")
         print("8. Zamknij program")
+        print('9. testDefinition')
         print()
         
         try:
@@ -315,6 +336,9 @@ while True:
         
             if user_choice == 8:
                 sys.exit(0)
+
+            if user_choice == 9:
+                testDefinition()
        
         except ValueError:
             print('Wybierz poprawnie pozycje!')
