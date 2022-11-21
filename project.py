@@ -232,17 +232,20 @@ def deleteIncomes(month):
 # TestDefinition
 def testDefinition():
     os.system('clear')
+    print('Statystyki z miesiaca')
+    print('---------------------------------------------------------------------------------------------')
+    print()
     db = sqlite3.connect('expenses_and_incomes.db')
     cursor = db.cursor()
     sumValueMonth = ("SELECT sum(value) FROM expenses WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
     cursor.execute(sumValueMonth)
-    sumValueMonth = cursor.fetchall()[0]
-    print('Suma wydatków w tym miesiacu: ', sumValueMonth, '€')
+    sumValueMonth = cursor.fetchone()[0]
+    print('Suma wydatków w tym miesiacu: ', sumValueMonth,'€')
     print()
     avgValueMonth = ("SELECT avg(value) FROM expenses WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
     cursor.execute(avgValueMonth)
-    avgValueMonth = cursor.fetchall()[0]
-    print('Srednia wydatków w tym miesiacu: ', avgValueMonth, '€')
+    avgValueMonth = cursor.fetchone()[0]
+    print('Srednia wydatków w tym miesiacu: ', int(avgValueMonth),'€')
     print()
     cursor.close()
     db.close()
