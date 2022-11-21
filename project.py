@@ -20,7 +20,7 @@ def get_expenses(month):
         db = sqlite3.connect('expenses_and_incomes.db')
         cursor = db.cursor()
 
-        sql3 = "SELECT * FROM expenses"
+        sql3 = "SELECT * FROM expenses WHERE strftime('%m', date) = " +"'"+ str(month)+"'"
 
         cursor.execute(sql3)
         
@@ -277,6 +277,12 @@ def testDefinition():
     sumIncomes = cursor.fetchone()[0]
     print('Suma przychodow w tym roku:',sumIncomes,'€')
     print()
+
+    diffExpIncMonth = ("SELECT sum(value) FROM incomes "-" sum(value) FROM expenses WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
+    cursor.execute(diffExpIncMonth)
+    diffExpIncMonth = cursor.fetchone()[0]
+    print('Aktualny balans wynosi:',diffExpIncMonth)
+    print()
     
     cursor.close()
     db.close()
@@ -285,6 +291,7 @@ def testDefinition():
 # MainWhile
 while True:
     try:
+        os.system('clear')
         year = int(input('Podaj rok: '))
         print()
         month = int(input("Podaj miesiac [1-12]: "))
