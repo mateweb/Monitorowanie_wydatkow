@@ -114,25 +114,60 @@ def delete_expenses(month):
 # Statistics
 def show_statistics(month):
     os.system('clear')
+    print('WYDATKI: ')
+    print('---------------------------------------------------------------------------------------------')
+    
     db = sqlite3.connect('expenses_and_incomes.db')
     cursor = db.cursor()
-    sumValueMonth = ("SELECT SUM(value) FROM expenses WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
-    cursor.execute(sumValueMonth)
-    sum = cursor.fetchall() 
-    print('Suma wydatków: ', sum)
+    
+    sumExpenseMonth = ("SELECT sum(value) FROM expenses WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
+    cursor.execute(sumExpenseMonth)
+    sumExpenseMonth = cursor.fetchone()[0]
+    print('Suma wydatków w tym miesiacu:',sumExpenseMonth,'€')
+    print()
+    
+    avgExpenseMonth = ("SELECT avg(value) FROM expenses WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
+    cursor.execute(avgExpenseMonth)
+    avgExpenseMonth = cursor.fetchone()[0]
+    print('Srednia wydatków w tym miesiacu:',int(avgExpenseMonth),'€')
+    print()
+    
+    sumExpenses = ("SELECT sum(value) FROM expenses")
+    cursor.execute(sumExpenses)
+    sumExpenses = cursor.fetchone()[0]
+    print('Suma wydatków w tym roku:',sumExpenses,'€')
+    print()
+    
+    print()    
+    print('PRZYCHODY: ')
+    print('---------------------------------------------------------------------------------------------')
+    
+    sumIncomeMonth = ("SELECT sum(value) FROM incomes WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
+    cursor.execute(sumIncomeMonth)
+    sumIncomeMonth = cursor.fetchone()[0]
+    print('Suma przychodow w tym miesiacu:',sumIncomeMonth,'€')
+    print()
+    
+    avgIncomeMonth = ("SELECT avg(value) FROM incomes WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
+    cursor.execute(avgIncomeMonth)
+    avgIncomeMonth = cursor.fetchone()[0]
+    print('Srednia przychodow w tym miesiacu:',int(avgIncomeMonth),'€')
+    print()
+    
+    sumIncomes = ("SELECT sum(value) FROM incomes")
+    cursor.execute(sumIncomes)
+    sumIncomes = cursor.fetchone()[0]
+    print('Suma przychodow w tym roku:',sumIncomes,'€')
+    print()
+
+    #diffExpIncMonth = ("SELECT sum(value) FROM incomes "-" sum(value) FROM expenses WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
+    #cursor.execute(diffExpIncMonth)
+    #diffExpIncMonth = cursor.fetchone()[0]
+    #print('Aktualny balans wynosi:',diffExpIncMonth)
+    #print()
+    
     cursor.close()
     db.close()
-
-
-    #summ_value_month = sum(expense_value for expense_value, _, expense_month in expenses if expense_month == month)
-    #summ_all_expense = sum(expense_value for expense_value, _, _, in expenses)
-    #summ_all_income = sum(income_value for income_value, _, _, in incomes) 
-    #diff = summ_all_income - summ_all_expense
-
-    #print('Aktualny balans [€]: ', diff)
-    #print('Najdrozszy wydatek dotychczas [€]: ', max(expenses))
-    #print('Najwyzszy przychod dotychczas [€]: ', max(incomes))
-    #print('Laczna ilosc wydatkow w tym roku [€]: ', summ_all_expense)
 
 
 # AddIncome
@@ -231,61 +266,7 @@ def deleteIncomes(month):
 
 # TestDefinition
 def testDefinition():
-    os.system('clear')
-    print('WYDATKI: ')
-    print('---------------------------------------------------------------------------------------------')
-    
-    db = sqlite3.connect('expenses_and_incomes.db')
-    cursor = db.cursor()
-    
-    sumExpenseMonth = ("SELECT sum(value) FROM expenses WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
-    cursor.execute(sumExpenseMonth)
-    sumExpenseMonth = cursor.fetchone()[0]
-    print('Suma wydatków w tym miesiacu:',sumExpenseMonth,'€')
-    print()
-    
-    avgExpenseMonth = ("SELECT avg(value) FROM expenses WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
-    cursor.execute(avgExpenseMonth)
-    avgExpenseMonth = cursor.fetchone()[0]
-    print('Srednia wydatków w tym miesiacu:',int(avgExpenseMonth),'€')
-    print()
-    
-    sumExpenses = ("SELECT sum(value) FROM expenses")
-    cursor.execute(sumExpenses)
-    sumExpenses = cursor.fetchone()[0]
-    print('Suma wydatków w tym roku:',sumExpenses,'€')
-    print()
-    
-    print()    
-    print('PRZYCHODY: ')
-    print('---------------------------------------------------------------------------------------------')
-    
-    sumIncomeMonth = ("SELECT sum(value) FROM incomes WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
-    cursor.execute(sumIncomeMonth)
-    sumIncomeMonth = cursor.fetchone()[0]
-    print('Suma przychodow w tym miesiacu:',sumIncomeMonth,'€')
-    print()
-    
-    avgIncomeMonth = ("SELECT avg(value) FROM incomes WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
-    cursor.execute(avgIncomeMonth)
-    avgIncomeMonth = cursor.fetchone()[0]
-    print('Srednia przychodow w tym miesiacu:',int(avgIncomeMonth),'€')
-    print()
-    
-    sumIncomes = ("SELECT sum(value) FROM incomes")
-    cursor.execute(sumIncomes)
-    sumIncomes = cursor.fetchone()[0]
-    print('Suma przychodow w tym roku:',sumIncomes,'€')
-    print()
-
-    diffExpIncMonth = ("SELECT sum(value) FROM incomes "-" sum(value) FROM expenses WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
-    cursor.execute(diffExpIncMonth)
-    diffExpIncMonth = cursor.fetchone()[0]
-    print('Aktualny balans wynosi:',diffExpIncMonth)
-    print()
-    
-    cursor.close()
-    db.close()
+    pass
 
 
 # MainWhile
@@ -323,6 +304,8 @@ while True:
         print("6. Usun przychod")
         print("7. Statystyki")
         print("8. Zamknij program")
+        print()
+        print()
         print('9. testDefinition')
         print()
         
