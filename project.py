@@ -159,12 +159,13 @@ def show_statistics(month):
     sumIncomes = cursor.fetchone()[0]
     print('Suma przychodow w tym roku:',sumIncomes,'€')
     print()
+    print()
 
-    #diffExpIncMonth = ("SELECT sum(value) FROM incomes "-" sum(value) FROM expenses WHERE strftime('%m', date) = " +"'"+ str(month)+"'")
-    #cursor.execute(diffExpIncMonth)
-    #diffExpIncMonth = cursor.fetchone()[0]
-    #print('Aktualny balans wynosi:',diffExpIncMonth)
-    #print()
+    diffExpIncMonth = (sumIncomeMonth - sumExpenseMonth) 
+    print('*********************************************************************************************')
+    print()
+    print('Aktualny balans wynosi:',diffExpIncMonth,'€')
+    print()
     
     cursor.close()
     db.close()
