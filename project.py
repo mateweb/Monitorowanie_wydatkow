@@ -54,7 +54,13 @@ def add_expense(month):
         print()
         expense_cat = input('Podaj kategorie: [Jedzenie, Chemia, Auto, Mieszkanie, Sparkonto, etc.] ')
         print()
-        
+        if expense_cat.isalpha():
+            print('Poprawnie dodano.')
+            pass 
+        else:
+            print('Wpisz poprawna kategorie!')
+            
+    
         expense = (expense_value, expense_cat, month)
         expenses.append(expense)
 
@@ -112,7 +118,7 @@ def delete_expenses(month):
 
 
 # Statistics
-def show_statistics(month):
+def show_statistics(month): 
     os.system('clear')
     print('WYDATKI: ')
     print('---------------------------------------------------------------------------------------------')
