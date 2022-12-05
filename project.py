@@ -4,6 +4,7 @@ import datetime
 import os
 
 from datetime import date, datetime
+from string import ascii_letters
 
 # Variables
 
@@ -52,13 +53,14 @@ def add_expense(month):
     try:
         expense_value = int(input('Podaj kwote wydatku [euro]: '))
         print()
-        expense_cat = input('Podaj kategorie: [Jedzenie, Chemia, Auto, Mieszkanie, Sparkonto, etc.] ')
-        print()
-        if expense_cat.isalpha():
-            print('Poprawnie dodano.')
-            pass 
-        else:
-            print('Wpisz poprawna kategorie!')
+        try:
+            expense_cat = input('Podaj kategorie: [Jedzenie, Chemia, Auto, Mieszkanie, Sparkonto, etc.] ')
+            print()
+            assert all(c in ascii_letters for c in expense_cat)
+
+        except:
+            print('Wpisz poprawna kategorie! ')
+
             
     
         expense = (expense_value, expense_cat, month)
